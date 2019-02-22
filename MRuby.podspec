@@ -8,10 +8,7 @@ Pod::Spec.new do |s|
         :tag => s.version.to_s,
     }
     s.summary = 'mruby + ios + :hearts:'
-    # s.prepare_command = './build.sh'
-    s.platform = :ios, '10.0'
 
-    s.source_files = 'MRuby/MRuby.framework/Headers/*.h'
-    s.vendored_frameworks = 'MRuby/MRuby.framework'
-    s.public_header_files = 'MRuby/MRuby.framework/Headers/mruby.h'
+    s.source_files = 'src/mruby/include/*.h'
+    s.vendored_libraries = 'libmruby.a'
 end
