@@ -3,10 +3,10 @@ Pod::Spec.new do |s|
     s.version = '2.0.0.1'
     s.authors = 'rinsuki', 'mruby original authors'
     s.homepage = 'https://github.com/rinsuki/mruby-pod'
-    s.source = {
-        :git => 'https://github.com/rinsuki/mruby-pod.git',
-        :tag => s.version.to_s,
-    }
+    # s.source = {
+    #     :git => 'https://github.com/rinsuki/mruby-pod.git',
+    #     :tag => s.version.to_s,
+    # }
     s.summary = 'mruby + ios + :hearts:'
     s.prepare_command = './build.sh'
     s.platform = :ios, '10.0'
