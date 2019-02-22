@@ -10,6 +10,6 @@ Pod::Spec.new do |s|
     s.summary = 'mruby + ios + :hearts:'
 
     s.source_files = 'src/mruby/include/**/*.h'
-    s.public_header_files = 'src/mruby/include/*.h'
+    s.private_header_files = 'src/mruby/include/mruby/*.h'
     s.vendored_libraries = 'libmruby.a'
 end
