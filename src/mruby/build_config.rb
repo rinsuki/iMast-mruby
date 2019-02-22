@@ -125,28 +125,40 @@ MRuby::Build.new('test') do |conf|
   conf.gembox 'default'
 end
 
-#MRuby::Build.new('bench') do |conf|
-#  # Gets set by the VS command prompts.
-#  if ENV['VisualStudioVersion'] || ENV['VSINSTALLDIR']
-#    toolchain :visualcpp
-#  else
-#    toolchain :gcc
-#    conf.cc.flags << '-O3'
-#  end
-#
-#  conf.gembox 'default'
-#end
+MRuby::CrossBuild.new('ios_sim') do |conf|
+  toolchain :clang
 
-# Define cross build settings
-# MRuby::CrossBuild.new('32bit') do |conf|
-#   toolchain :gcc
-#
-#   conf.cc.flags << "-m32"
-#   conf.linker.flags << "-m32"
-#
-#   conf.build_mrbtest_lib_only
-#
-#   conf.gem 'examples/mrbgems/c_and_ruby_extension_example'
-#
-#   conf.test_runner.command = 'env'
-# end
+  SDK_PATH_SIM="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk"
+
+  conf.cc do |cc|
+    cc.command = "xcrun"
+    cc.flags = %W(-sdk iphonesimulator clang -arch x86_64 -isysroot #{SDK_PATH_SIM} -fembed-bitcode-marker)
+  end
+
+  conf.linker do |linker|
+    linker.command = "xcrun"
+    linker.flags = %W(-sdk iphonesimulator clang -arch x86_64 -isysroot #{SDK_PATH_SIM} -fembed-bitcode-marker)
+  end
+
+  conf.bins = []
+  conf.gembox 'imast'
+end
+
+MRuby::CrossBuild.new('ios') do |conf|
+  toolchain :clang
+
+  SDK_PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk"
+
+  conf.cc do |cc|
+    cc.command = "xcrun"
+    cc.flags = %W(-sdk iphoneos clang -arch arm64 -arch arm64e -arch armv7 -arch armv7s -isysroot #{SDK_PATH} -fembed-bitcode-marker)
+  end
+
+  conf.linker do |linker|
+    linker.command = "xcrun"
+    linker.flags = %W(-sdk iphoneos clang -arch arm64 -arch arm64e -arch armv7 -arch armv7s -isysroot #{SDK_PATH} -fembed-bitcode-marker)
+  end
+
+  conf.bins = []
+  conf.gembox 'imast'
+end
