@@ -79,6 +79,8 @@ MRuby::GemBox.new do |conf|
   
     # Use mruby-compiler to build other mrbgems
     conf.gem :core => "mruby-compiler"
+
+    conf.gem :core => "mruby-socket"
   
     conf.gem :github => 'shibafu528/mruby-pluggaloid', :branch => 'mruby'
     conf.gem :github => 'matsumoto-r/mruby-sleep'

@@ -24,6 +24,7 @@ MRuby::Build.new do |conf|
 
   # include the default GEMs
   conf.gembox 'default'
+  conf.gembox 'imast'
   # C compiler settings
   # conf.cc do |cc|
   #   cc.command = ENV['CC'] || 'gcc'
@@ -98,7 +99,7 @@ MRuby::Build.new('host-debug') do |conf|
   enable_debug
 
   # include the default GEMs
-  conf.gembox 'default'
+  conf.gembox 'imast'
 
   # C compiler settings
   conf.cc.defines = %w(MRB_ENABLE_DEBUG_HOOK)
@@ -110,20 +111,20 @@ MRuby::Build.new('host-debug') do |conf|
   # conf.enable_bintest
 end
 
-MRuby::Build.new('test') do |conf|
-  # Gets set by the VS command prompts.
-  if ENV['VisualStudioVersion'] || ENV['VSINSTALLDIR']
-    toolchain :visualcpp
-  else
-    toolchain :gcc
-  end
+# MRuby::Build.new('test') do |conf|
+#   # Gets set by the VS command prompts.
+#   if ENV['VisualStudioVersion'] || ENV['VSINSTALLDIR']
+#     toolchain :visualcpp
+#   else
+#     toolchain :gcc
+#   end
 
-  enable_debug
-  conf.enable_bintest
-  conf.enable_test
+#   enable_debug
+#   conf.enable_bintest
+#   conf.enable_test
 
-  conf.gembox 'default'
-end
+#   conf.gembox 'default'
+# end
 
 MRuby::CrossBuild.new('ios_sim') do |conf|
   toolchain :clang
